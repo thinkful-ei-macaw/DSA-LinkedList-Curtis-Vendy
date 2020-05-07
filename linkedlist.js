@@ -38,20 +38,39 @@ class LinkedList {
     }
     //keep track of currNode
     let currNode = this.head;
-    console.log('THis is currNode 1: ', currNode.value);
     //keep track of previous node
     let previousNode = this.head;
-    console.log('THis is previous Node 1: ', previousNode.value);
     //iterate through until end
     while((currNode !== null) && (currNode.value !== item)){
       //save previous node
       previousNode = currNode;
-      console.log('THis is previous Node 2: ', previousNode.value);
       //move onto next node
       currNode = currNode.next;
-      console.log('THis is currNode 2: ', currNode.value);
     }
     return currNode.next = new Node(name,currNode.next);
+  }
+  insertAt(name,index){
+    let currNode = this.head;
+    let count = 0;
+    //check if index has num
+    
+    
+    while(currNode.next !== null){
+      if(count < index-1){ //at node before 
+        currNode = currNode.next;
+        count++;
+      } else{
+        //connect new node to node after selected
+        const newNode = new Node(name, currNode.next.next);
+        //disconnect node to node after
+        currNode.next.next = null;
+        //connect new node to node before 
+        currNode.next = newNode;
+        return newNode;
+      }
+    }
+    
+    
   }
   insertLast(item){
     //check if has list
@@ -107,6 +126,9 @@ class LinkedList {
     }
     //check for the item
     while(currNode !== null){
+      if(currNode.value=== item){
+        return currNode;
+      }
       //return null if at end of list
       //and item is not on the list
       if(currNode.next === null){
@@ -118,7 +140,7 @@ class LinkedList {
       }
     }
     //found the node!
-    return currNode;
+    
   }
 
 }
@@ -132,8 +154,10 @@ function main(){
   ll.insertLast('Starbuck');
   ll.insertLast('Tauhida');
   ll.remove('squirrel');
-  ll.insertBefore('Husker', 'hello');
-  ll.insertAfter('hello', 'Workshop');
+  ll.insertBefore('Boomer', 'Athena');
+  ll.insertAfter('Helo', 'Hotdog');
+  ll.insertAt('Kat', 3);
+  ll.remove('Tauhida');
   printNode(ll);
   
 
