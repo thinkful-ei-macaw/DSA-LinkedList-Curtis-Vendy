@@ -51,7 +51,7 @@ class LinkedList {
       currNode = currNode.next;
       console.log('THis is currNode 2: ', currNode.value);
     }
-    return currNode.next = new Node(name,previousNode);
+    return currNode.next = new Node(name,currNode.next);
   }
   insertLast(item){
     //check if has list
