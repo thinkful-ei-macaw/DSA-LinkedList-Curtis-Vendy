@@ -127,6 +127,7 @@ class LinkedList {
     //check for the item
     while(currNode !== null){
       if(currNode.value=== item){
+        //found the node!!
         return currNode;
       }
       //return null if at end of list
@@ -139,7 +140,6 @@ class LinkedList {
         currNode = currNode.next;
       }
     }
-    //found the node!
     
   }
 
@@ -159,10 +159,13 @@ function main(){
   ll.insertAt('Kat', 3);
   ll.remove('Tauhida');
   printNode(ll);
-  
-
-
+  console.log(sizeLL(ll));
+  console.log(isEmpty(ll));
+  console.log(findPrevious(ll,'Kat'));
+  console.log(findLast(ll));
 }
+
+//display
 function printNode(linkedlist){
   let node = linkedlist.head;
   while(node !== null){
@@ -171,12 +174,64 @@ function printNode(linkedlist){
   }
 
 }
+
+//recursive display
 function print(n){
   if(n){
     console.log(n.value);
     print(n.next);
   } else{
     return;
+  }
+}
+//get size
+function sizeLL(ll){
+  let currNode = ll.head;
+  let count=0;
+  
+  while(currNode !== null){
+    currNode = currNode.next;
+    count++;
+  }
+  return count;
+}
+
+//is empty
+function isEmpty(ll){
+  if(ll.head === null){
+    return 'linked list is empty';
+  } else{
+    return `linked list is not empty and contains ${sizeLL(ll)} nodes.`;
+  }
+}
+
+function findPrevious(ll, n){
+  let currNode = ll.head;
+
+  if(ll.head === null){
+    return;
+  }
+
+  while((currNode !== null) && (currNode.next !== null)){
+    if(currNode.next.value===n){
+      return currNode.value;
+    }
+    currNode = currNode.next;   
+  }
+}
+
+function findLast(ll){
+  let currNode = ll.head;
+
+  if(currNode === null){
+    return;
+  }
+
+  while((currNode !== null)){
+    if(currNode.next === null){
+      return currNode.value;
+    }
+    currNode = currNode.next;
   }
 }
 main();
